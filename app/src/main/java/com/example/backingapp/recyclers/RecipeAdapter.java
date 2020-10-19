@@ -51,10 +51,10 @@ public class RecipeAdapter extends BaseAdapter {
 
         View view = inflater.inflate(R.layout.recipe_holder, parent,false);
         TextView textView = view.findViewById(R.id.recipe_name);
-        ImageView imageView = view.findViewById(R.id.recipe_image);
+       // ImageView imageView = view.findViewById(R.id.recipe_image);
 
         textView.setText(recipe.getName());
-        //imageView.setImageResource(recipe.getImage());
+       // imageView.setImageResource(recipe.getImage());
 
         return view;
     }
