@@ -18,7 +18,7 @@ public class StepsFragement extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_steps, container,false);
+        View rootView = inflater.inflate(R.layout.fragment_recipe_details, container, false);
 
         // deal with the rootView elements
 
