@@ -7,7 +7,7 @@
     android:layout_margin="10dp">
 
     <TextView
-        android:id="@+id/recipe_name"
+        android:id="@+id/recipe_title"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:gravity="center"
