@@ -1,13 +1,13 @@
 package com.example.backingapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class StepViewer extends AppCompatActivity {
+public class StepDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_step_viewer);
+        setContentView(R.layout.activity_step_details);
     }
 }

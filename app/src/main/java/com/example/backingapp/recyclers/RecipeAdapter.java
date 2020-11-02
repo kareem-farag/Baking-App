@@ -14,14 +14,27 @@ import com.example.backingapp.utils.Recipe;
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
+    OnRecipeClickListener clickListener;
     List<Recipe> recipeList;
     Context context;
 
-
-    public RecipeAdapter(Context context, List<Recipe> recipesIds) {
+    public RecipeAdapter(Context context, List<Recipe> recipesIds, OnRecipeClickListener onRecipeClickListener) {
         this.recipeList = recipesIds;
         this.context = context;
+        this.clickListener = onRecipeClickListener;
 
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder viewHolder, int i) {
+        final int position = i;
+        viewHolder.recipeTitle.setText(recipeList.get(i).getName());
+        viewHolder.recipeTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onRecipeClickListener(recipeList.get(position));
+            }
+        });
     }
 
     @NonNull
@@ -32,9 +45,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.recipeTitle.setText(recipeList.get(i).getName());
+    public Recipe getRecipeById(int id) {
+        return recipeList.get(id);
     }
 
     @Override
@@ -47,6 +59,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return recipeList.size();
     }
 
+    public interface OnRecipeClickListener {
+        void onRecipeClickListener(Recipe recipe);
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         final TextView recipeTitle;
