@@ -41,9 +41,9 @@ public class Recipe implements Parcelable {
         servings = in.readString();
         image = in.readString();
         ingredientList = new ArrayList<Ingredient>();
-        in.readList(ingredientList, Ingredient.class.getClassLoader());
+        in.readList(ingredientList, getClass().getClassLoader());
         stepList = new ArrayList<Step>();
-        in.readList(stepList, Step.class.getClassLoader());
+        in.readList(stepList, getClass().getClassLoader());
 
     }
 
@@ -108,8 +108,10 @@ public class Recipe implements Parcelable {
         dest.writeString(name);
         dest.writeString(servings);
         dest.writeString(image);
+        dest.writeList(ingredientList);
+        //dest.writeTypedList(ingredientList);
 
-        dest.writeTypedList(ingredientList);
-        dest.writeTypedList(stepList);
+        //dest.writeTypedList(stepList);
+        dest.writeList(stepList);
     }
 }

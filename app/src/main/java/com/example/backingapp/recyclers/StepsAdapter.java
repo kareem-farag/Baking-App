@@ -14,12 +14,26 @@ import com.example.backingapp.utils.Step;
 import java.util.List;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.viewHolder> {
+    private OnStepClickListener onStepClickListener;
     private List<Step> stepList;
     private Context context;
 
-    public StepsAdapter(List<Step> steps, Context context) {
+    public StepsAdapter(List<Step> steps, Context context, OnStepClickListener onStepClickListener) {
         this.stepList = steps;
         this.context = context;
+        this.onStepClickListener = onStepClickListener;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull StepsAdapter.viewHolder viewHolder, int i) {
+        final int itemIndex = i;
+        viewHolder.stepTextView.setText(stepList.get(i).getDescription());
+        viewHolder.stepTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onStepClickListener.onItemClickListener(stepList.get(itemIndex));
+            }
+        });
     }
 
     @NonNull
@@ -32,9 +46,8 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.viewHolder> 
     }
 
 
-    @Override
-    public void onBindViewHolder(@NonNull StepsAdapter.viewHolder viewHolder, int i) {
-        viewHolder.stepTextView.setText(stepList.get(i).getDescription());
+    public interface OnStepClickListener {
+        public void onItemClickListener(Step step);
     }
 
 
@@ -45,6 +58,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.viewHolder> 
 
     public class viewHolder extends RecyclerView.ViewHolder {
         final TextView stepTextView;
+
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             stepTextView = itemView.findViewById(R.id.step_holder_description);
