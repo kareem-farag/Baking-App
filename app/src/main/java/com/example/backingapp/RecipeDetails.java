@@ -31,6 +31,10 @@ public class RecipeDetails extends AppCompatActivity {
             StepsSelectFragement stepsSelectFragement = new StepsSelectFragement();
             stepsSelectFragement.setIngredientList(ingredientList);
             stepsSelectFragement.setStepList(stepList);
+            if (findViewById(R.id.recipe_details_step_viewer) != null) {
+                stepsSelectFragement.setTablet(true);
+            }
+
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().add(R.id.recipe_details_holder, stepsSelectFragement).commit();

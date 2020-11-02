@@ -26,6 +26,7 @@ public class StepsSelectFragement extends Fragment {
     private Context context;
     private List<Step> stepList;
     private List<Ingredient> ingredientList;
+    private Boolean isTablet;
 
     public StepsSelectFragement() {
 
@@ -41,9 +42,12 @@ public class StepsSelectFragement extends Fragment {
         StepsAdapter stepsAdapter = new StepsAdapter(stepList, context, new StepsAdapter.OnStepClickListener() {
             @Override
             public void onItemClickListener(Step step) {
+
                 Intent intent = new Intent(context, StepDetails.class);
 
                 startActivity(intent);
+
+
             }
         });
 
@@ -63,6 +67,14 @@ public class StepsSelectFragement extends Fragment {
 
     public void setIngredientList(List<Ingredient> ingredientList) {
         this.ingredientList = ingredientList;
+    }
+
+    public Boolean getTablet() {
+        return isTablet;
+    }
+
+    public void setTablet(Boolean tablet) {
+        isTablet = tablet;
     }
 
     @Override
