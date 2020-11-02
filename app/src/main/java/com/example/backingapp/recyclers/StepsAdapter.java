@@ -1,5 +1,6 @@
 package com.example.backingapp.recyclers;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,9 +9,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.backingapp.R;
+import com.example.backingapp.utils.Step;
+
+import java.util.List;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.viewHolder> {
-    List<String>
+    private List<Step> stepList;
+    private Context context;
+
+    public StepsAdapter(List<Step> steps, Context context) {
+        this.stepList = steps;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -24,13 +34,13 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.viewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull StepsAdapter.viewHolder viewHolder, int i) {
-
+        viewHolder.stepTextView.setText(stepList.get(i).getDescription());
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return stepList.size();
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
