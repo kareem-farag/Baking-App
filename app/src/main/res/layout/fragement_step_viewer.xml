@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_steps_viewer"
-    android:name="StepViewerFragment">
+    android:name="StepViewerFragment"
+    android:orientation="vertical">
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/player"

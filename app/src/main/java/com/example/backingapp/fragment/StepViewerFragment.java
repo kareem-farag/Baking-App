@@ -45,13 +45,14 @@ public class StepViewerFragment extends Fragment {
         PlayerView playerView = rootView.findViewById(R.id.player);
         playerView.setPlayer(player);
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(context,
-                Util.getUserAgent(context, "applicationName"));
-// This is the MediaSource representing the media to be played.
+                Util.getUserAgent(context, "Baking App"));
+
         MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd974_-intro-creampie/-intro-creampie.mp4"));
-// Prepare the player with the source.
+                .createMediaSource(Uri.parse(step.getVideoURL()));
+
 
         player.prepare(videoSource);
+        player.setPlayWhenReady(true);
 
         return rootView;
     }

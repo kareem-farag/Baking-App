@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".StepDetails">
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.example.backingapp.fragment.StepViewerFragment"
+    <LinearLayout
+        android:id="@+id/step_detail_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:orientation="horizontal"></LinearLayout>
 </LinearLayout>
