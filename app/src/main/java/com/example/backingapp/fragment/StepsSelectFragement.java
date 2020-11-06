@@ -3,6 +3,7 @@ package com.example.backingapp.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import com.example.backingapp.recyclers.StepsAdapter;
 import com.example.backingapp.utils.Ingredient;
 import com.example.backingapp.utils.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StepsSelectFragement extends Fragment {
@@ -60,6 +62,7 @@ public class StepsSelectFragement extends Fragment {
                     fragmentManager.beginTransaction().replace(R.id.recipe_details_step_viewer, stepViewerFragment).commit();
                 } else {
                     Intent intent = new Intent(context, StepDetails.class);
+                    intent.putParcelableArrayListExtra("stepList", (ArrayList<? extends Parcelable>) stepList);
                     intent.putExtra("step", step);
                     startActivity(intent);
                 }

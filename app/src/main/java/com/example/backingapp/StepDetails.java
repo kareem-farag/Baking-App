@@ -3,21 +3,60 @@ package com.example.backingapp;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.backingapp.fragment.StepViewerFragment;
+import com.example.backingapp.utils.Step;
+
+import java.util.List;
 
 public class StepDetails extends AppCompatActivity {
+    private Button nextButton;
+    private Button previousButton;
+    private Step step;
+    private List<Step> stepList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_details);
 
+        nextButton = findViewById(R.id.next_step_button);
+        previousButton = findViewById(R.id.previous_step_button);
+
         StepViewerFragment stepViewerFragment = new StepViewerFragment();
+
         if (getIntent().getExtras() != null) {
-            stepViewerFragment.setStep(getIntent().getExtras().getParcelable("step"));
+            step = getIntent().getExtras().getParcelable("step");
+            stepList = getIntent().getExtras().getParcelableArrayList("stepList");
+
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
+        stepViewerFragment.setStep(step);
+
         fragmentManager.beginTransaction().add(R.id.step_detail_video, stepViewerFragment).commit();
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                step = step.getNextStep(step, stepList);
+                stepViewerFragment.setStep(step);
+                fragmentManager.beginTransaction().replace(R.id.step_detail_video, stepViewerFragment).commit();
+            }
+        });
+
+        previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                step = step.getPreviousStep(step, stepList);
+                stepViewerFragment.setStep(step);
+                fragmentManager.beginTransaction().replace(R.id.step_detail_video, stepViewerFragment).commit();
+
+
+            }
+        });
+
+
     }
 }

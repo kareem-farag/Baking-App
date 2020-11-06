@@ -25,9 +25,12 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.util.List;
+
 public class StepViewerFragment extends Fragment {
     private Step step;
     private Context context;
+    private List<Step> stepList;
 
     public StepViewerFragment() {
 
@@ -65,5 +68,9 @@ public class StepViewerFragment extends Fragment {
 
     public void setStep(Step step) {
         this.step = step;
+    }
+
+    public void setStepList(List<Step> stepList) {
+        this.stepList = stepList;
     }
 }
