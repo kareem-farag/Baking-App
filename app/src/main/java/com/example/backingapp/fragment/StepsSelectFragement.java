@@ -26,10 +26,12 @@ import java.util.List;
 
 public class StepsSelectFragement extends Fragment {
 
+
     private Context context;
     private List<Step> stepList;
     private List<Ingredient> ingredientList;
     private Boolean isTablet = false;
+
 
     public StepsSelectFragement() {
 
@@ -54,6 +56,8 @@ public class StepsSelectFragement extends Fragment {
         StepsAdapter stepsAdapter = new StepsAdapter(stepList, context, new StepsAdapter.OnStepClickListener() {
             @Override
             public void onItemClickListener(Step step) {
+
+
                 if (isTablet == true) {
                     StepViewerFragment stepViewerFragment = new StepViewerFragment();
                     stepViewerFragment.setStep(step);
