@@ -37,11 +37,24 @@ public class StepsSelectFragement extends Fragment {
 
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("stepList", (ArrayList<? extends Parcelable>) stepList);
+        outState.putParcelableArrayList("ingredientList", (ArrayList<? extends Parcelable>) ingredientList);
+        outState.putBoolean("isTablet", isTablet);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_steps_list, container, false);
 
+        if (savedInstanceState != null) {
+            stepList = savedInstanceState.getParcelableArrayList("stepList");
+            ingredientList = savedInstanceState.getParcelableArrayList("ingredientList");
+            isTablet = savedInstanceState.getBoolean("isTablet");
+        }
         RecyclerView stepsRecycler = rootView.findViewById(R.id.recipe_steps_rv);
         TextView ingredients_text_view = rootView.findViewById(R.id.recipe_ingredients);
         String ingredientsString = "";
