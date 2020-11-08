@@ -60,6 +60,7 @@ public class StepDetails extends AppCompatActivity {
                     StepViewerFragment newStepViewerFragment = new StepViewerFragment();
                     step = step.getPreviousStep(step, stepList);
                     if (step != null) {
+
                         newStepViewerFragment.setStep(step);
                         fragmentManager.beginTransaction().replace(R.id.step_detail_video, newStepViewerFragment).commit();
                     } else {

@@ -59,11 +59,13 @@ public class StepsSelectFragement extends Fragment {
 
 
                 if (isTablet == true) {
+
                     StepViewerFragment stepViewerFragment = new StepViewerFragment();
                     stepViewerFragment.setStep(step);
 
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.recipe_details_step_viewer, stepViewerFragment).commit();
+                    stepViewerFragment = null;
                 } else {
                     Intent intent = new Intent(context, StepDetails.class);
                     intent.putParcelableArrayListExtra("stepList", (ArrayList<? extends Parcelable>) stepList);
