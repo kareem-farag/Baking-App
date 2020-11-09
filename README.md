@@ -6,8 +6,10 @@ Recipe list, selected Recipe ingredients and steps and every selected step video
 
 # Screen Shots
 
-![alt text](https://github.com/kareem-farag/Baking-App/blob/master/app/src/main/res/readme1.jpeg)
+![alt text](https://github.com/kareem-farag/Baking-App/blob/master/app/src/main/res/readme1.jpeg) 
 
-![alt text](https://github.com/kareem-farag/Baking-App/blob/master/app/src/main/res/readme2.jpeg)
 
-![alt text](https://github.com/kareem-farag/Baking-App/blob/master/app/src/main/res/readme3.jpeg)
+![alt text](https://github.com/kareem-farag/Baking-App/blob/master/app/src/main/res/readme2.jpeg) 
+
+
+![alt text](https://github.com/kareem-farag/Baking-App/blob/master/app/src/main/res/readme3.jpeg) 
