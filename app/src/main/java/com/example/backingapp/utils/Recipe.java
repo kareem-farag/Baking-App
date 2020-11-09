@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe implements Parcelable {
+    public static String recipeIngredient = "dddd";
     private String id;
     private String name;
     private String servings;
     private String image;
+    private List<Ingredient> ingredientList;
+    private List<Step> stepList;
+
     public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
         @Override
         public Recipe createFromParcel(Parcel in) {
@@ -22,8 +26,6 @@ public class Recipe implements Parcelable {
             return new Recipe[size];
         }
     };
-    private List<Ingredient> ingredientList;
-    private List<Step> stepList;
 
 
     public Recipe(String id, String name, String servings, String image, List<Ingredient> ingredientList, List<Step> stepList) {
@@ -109,9 +111,6 @@ public class Recipe implements Parcelable {
         dest.writeString(servings);
         dest.writeString(image);
         dest.writeList(ingredientList);
-        //dest.writeTypedList(ingredientList);
-
-        //dest.writeTypedList(stepList);
         dest.writeList(stepList);
     }
 }

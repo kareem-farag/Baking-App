@@ -24,6 +24,7 @@ public class RecipeDetails extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent.getExtras() != null) {
+            stepList = null;
             recipe = intent.getParcelableExtra("recipe");
             ingredientList = recipe.getIngredientList();
             stepList = recipe.getStepList();
