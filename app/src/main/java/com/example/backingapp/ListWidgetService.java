@@ -6,6 +6,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.example.backingapp.utils.Ingredient;
+import com.example.backingapp.utils.Recipe;
 
 import java.util.List;
 
@@ -13,13 +14,15 @@ public class ListWidgetService extends RemoteViewsService {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return new ListRemoteViewsFactory(this.getApplicationContext(), MainActivity.recipe.getIngredientList());
+        Recipe recipe = intent.getParcelableExtra("recipe");
+        return new ListRemoteViewsFactory(this.getApplicationContext(), recipe.getIngredientList());
     }
 }
 
 class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private Context context;
     private List<Ingredient> ingredientList;
+
 
     public ListRemoteViewsFactory(Context context, List<Ingredient> ingredientList) {
         this.context = context;
@@ -53,6 +56,8 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public RemoteViews getViewAt(int position) {
+
+
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_ingredient_item);
         Ingredient ingredient = ingredientList.get(position);
         remoteViews.setTextViewText(R.id.widget_ingredient_text, ingredient.getQuantity() + " " + ingredient.getMeasure() + " of " + ingredient.getIngredient());
@@ -82,5 +87,9 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     @Override
     public boolean hasStableIds() {
         return false;
+    }
+
+    public List<Ingredient> getIngredientList() {
+        return ingredientList;
     }
 }

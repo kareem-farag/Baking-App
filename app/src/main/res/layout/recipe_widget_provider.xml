@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_margin="8dp"
-        android:background="?attr/appWidgetBackgroundColor"
+        android:background="@color/colorPrimaryDark"
         android:contentDescription="@string/appwidget_text"
         android:padding="5dp"
         android:text="@string/appwidget_text"
