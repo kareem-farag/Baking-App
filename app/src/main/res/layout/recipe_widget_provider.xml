@@ -6,11 +6,6 @@
     android:padding="@dimen/widget_margin"
     android:theme="@style/ThemeOverlay.UdacityProjects.AppWidgetContainer">
 
-    <ListView
-        android:id="@+id/appwidget_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <TextView
         android:id="@+id/appwidget_text"
         android:layout_width="match_parent"
@@ -25,5 +20,10 @@
         android:textColor="?attr/appWidgetTextColor"
         android:textSize="24sp"
         android:textStyle="bold|italic" />
+
+    <ListView
+        android:id="@+id/appwidget_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

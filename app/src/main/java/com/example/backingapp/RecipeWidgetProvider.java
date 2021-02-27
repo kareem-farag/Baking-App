@@ -17,16 +17,21 @@ import com.example.backingapp.utils.Recipe;
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId, Recipe recipe) {
+                                int appWidgetId) {
 
+
+        Recipe recipe = MainActivity.recipe;
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget_provider);
         if (recipe != null) {
-            views.setTextViewText(R.id.appwidget_text, recipe.getName());
-            Intent serviceIntent = new Intent(context, ListWidgetService.class);
 
+
+            views.setTextViewText(R.id.appwidget_text, recipe.getName());
+
+            Intent serviceIntent = new Intent(context, ListWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+
             views.setRemoteAdapter(R.id.appwidget_list, serviceIntent);
 
             Intent intent = new Intent(context, RecipeDetails.class);
@@ -45,7 +50,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId, null);
+            updateAppWidget(context, appWidgetManager, appWidgetId);
         }
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
     }

@@ -2,8 +2,9 @@ package com.example.backingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.backingapp.fragment.StepsSelectFragement;
 import com.example.backingapp.utils.Ingredient;

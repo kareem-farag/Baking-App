@@ -3,14 +3,15 @@ package com.example.backingapp.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.backingapp.R;
 import com.example.backingapp.utils.Step;
@@ -33,7 +34,7 @@ public class StepViewerFragment extends Fragment {
     private Step step;
     private Context context;
     private List<Step> stepList;
-
+    SimpleExoPlayer simpleExoPlayer;
     private TextView stepDetailsTv;
 
     public StepViewerFragment() {
@@ -59,23 +60,40 @@ public class StepViewerFragment extends Fragment {
 
         stepDetailsTv = rootView.findViewById(R.id.step_viewer_details_tv);
         stepDetailsTv.setText(step.getDescription());
-        SimpleExoPlayer player = ExoPlayerFactory.newSimpleInstance(context);
-        PlayerView playerView = rootView.findViewById(R.id.player);
-        playerView.setPlayer(player);
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(context,
-                Util.getUserAgent(context, "Baking App"));
-        try {
-            MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-                    .createMediaSource(Uri.parse(step.getVideoURL()));
+
+        if (simpleExoPlayer == null) {
+            simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector, loadControl);
+
+            PlayerView playerView = rootView.findViewById(R.id.player);
+            playerView.setPlayer(simpleExoPlayer);
 
 
-            player.prepare(videoSource);
-            player.setPlayWhenReady(true);
+            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(context,
+                    Util.getUserAgent(context, "Baking App"));
+            try {
+                MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+                        .createMediaSource(Uri.parse(step.getVideoURL()));
 
-        } catch (Exception e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+
+                simpleExoPlayer.prepare(videoSource);
+                simpleExoPlayer.setPlayWhenReady(true);
+
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
         return rootView;
+    }
+
+    private void releasePlayer() {
+        simpleExoPlayer.stop();
+        simpleExoPlayer.release();
+        simpleExoPlayer = null;
+    }
+
+    public void onDetach() {
+        super.onDetach();
+        releasePlayer();
     }
 
     @Override
@@ -83,6 +101,7 @@ public class StepViewerFragment extends Fragment {
         super.onAttach(context);
         this.context = context;
     }
+
 
     public void setStep(Step step) {
         this.step = step;
